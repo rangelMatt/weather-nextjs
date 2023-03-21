@@ -1,11 +1,17 @@
 import Image from "next/image";
 import React from "react";
 import spinner from "../public/loading.gif";
+import styles from "../styles/Loading.module.css";
 
-const Spinner = () => {
+const Spinner = (props) => {
   return (
-    <div>
-      <Image className="w-[200px] m-auto block" src={spinner} alt="loading.." />
+    <div className={props.loading ? styles.body_loading : styles.none}>
+      <div className={styles.lds_ellipsis}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import Image from "next/legacy/image";
 import React from "react";
 
 const Weather = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <main className="relative flex flex-col justify-between max-w-[500px] w-full h-[90vh] m-auto p-4 text-gray-300 z-10">
       <header className="relative flex justify-between pt-12 bg-black/50 p-8 rounded-md shadow-2xl">
