@@ -46,35 +46,48 @@ export default function Home() {
         {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* Overlay */}
-      <div className=" bg-black/40 z-[1] backdrop-filter backdrop-grayscale" />
       {/* Background */}
       <Image
         src="https://images.unsplash.com/photo-1438786657495-640937046d18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
         layout="fill"
-        className="object-cover "
+        className="object-cover bg-cover bg-center bg-no-repeat brightness-50 w-full h-screen z=[1]"
         alt="Cape Perpetua"
       />
       {/* Search */}
-      <div className="relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10 ">
-        <form
-          onSubmit={fetchWeather}
-          className="flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl bg-gradient-to-r from-blue-500 hover:to-green-500 hover:bg-gradient-from-r shadow-md "
-        >
-          <div>
-            <input
-              city="city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              className="bg-transparent border-none text-white focus:outline-none text-2xl"
-              type="text"
-              placeholder="Search City"
-            />
-          </div>
-          <button onClick={fetchWeather}>
-            <BsSearch size={20} />
-          </button>
-        </form>
+      <div>
+        <div className="relative group flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10">
+          <div
+            className="absolute -inset-0.5 bg-gradient-to-r  from-blue-500 to-green-500 w-full m-auto p-3 rounded-2xl blur-md opacity-75 
+          
+          group-hover:to-blue-500 group-hover:from-green-500 shadow-md group-hover:bg-gradient-from-r 
+
+          
+          
+          animate-tilt"
+          ></div>
+          <form
+            onSubmit={fetchWeather}
+            className=" relative px-7 py-4 leading-none flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl bg-gradient-to-r from-blue-500 
+            transition duration-0 ease-out
+            group-hover:delay-500
+            group-hover:to-blue-500 group-hover:from-green-500 shadow-md group-hover:bg-gradient-from-r 
+            group-hover:text-gray-100 "
+          >
+            <div>
+              <input
+                city="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                className="bg-transparent border-none text-white focus:outline-none text-2xl"
+                type="text"
+                placeholder="Search City"
+              />
+            </div>
+            <button onClick={fetchWeather}>
+              <BsSearch size={20} />
+            </button>
+          </form>
+        </div>
       </div>
       {/* Weather */}
 
