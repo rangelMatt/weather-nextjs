@@ -6,10 +6,10 @@ const Weather = ({ data }) => {
   return (
     <>
       <div
-        className=" relative flex flex-col justify-between max-w-[500px] w-full h-[90vh] m-auto p-4 text-gray-300 z-10 animate__animated animate__fadeIn animate__ease-out
+        className=" relative flex flex-col justify-between max-w-[500px] w-full h-[80vh] m-auto p-4 text-gray-300 z-10 animate__animated animate__fadeIn animate__ease-out
       "
       >
-        <div className="relative flex justify-between pt-12 bg-black/50 p-8 rounded-md shadow-2xl ">
+        <div className="relative flex justify-between pt-12 bg-black/50 p-4 rounded-md shadow-2xl ">
           <div className="flex flex-col items-center ">
             <Image
               src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
@@ -25,7 +25,7 @@ const Weather = ({ data }) => {
           </div>
           <p className="text-9xl">{data.main.temp.toFixed(0)}&#176;</p>
         </div>
-        <div className="bg-black/50 relative p-8 rounded-md shadow-xl ">
+        <div className="bg-black/50 relative p-4 rounded-md shadow-xl ">
           <p className="text-2xl text-center pb-6">Weather in {data.name}</p>
           <div className="flex justify-between text-center ">
             <div>

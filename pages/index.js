@@ -7,13 +7,13 @@ import Weather from "../components/Weather";
 import Spinner from "../components/Spinner";
 // import Custom404 from "../pages/404";
 import errorHandler from "@/components/errorHandler";
-import errHandle from "@/components/ErrHandle";
+import FourOhOh from "./404";
 
 export default function Home() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(true);
+  const [err, setError] = useState(null);
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
   // console.log(city);
@@ -28,8 +28,10 @@ export default function Home() {
           setWeather(response.data);
         })
         .catch((err) => {
-          if (err.response.status === 400) {
-            window.location.href = "/";
+          if (err.response && err.response.status === 400) {
+            setError(err.response.data.err);
+          } else {
+            setError("Oops! Something went wrong.");
           }
         });
 
@@ -86,9 +88,9 @@ export default function Home() {
       <Image
         src="https://images.unsplash.com/photo-1438786657495-640937046d18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
         layout="fill"
-        className="object-cover bg-cover bg-center bg-no-repeat brightness-50 w-full h-screen z=[1]"
+        className=" bg-cover bg-center bg-no-repeat brightness-50 w-full h-screen z=[1]"
         alt="Cape Perpetua"
-      />
+      ></Image>
       {/* Search */}
       <div>
         <div className="relative group flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10">
@@ -129,6 +131,16 @@ export default function Home() {
       </div>
       {/* Weather */}
       {weather.main && <Weather data={weather} />}
+      {err && (
+        <div
+          className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4"
+          role="alert"
+        >
+          <p className="font-bold">Error: 400 Bad Request</p>
+          <p>{err}</p>
+        </div>
+      )}
+      <h3></h3>
     </div>
   );
 }
