@@ -5,11 +5,12 @@ const Weather = ({ data }) => {
   // console.log(data);
   return (
     <>
-      <div className="flex-1 bg-hero bg-cover bg-center bg-no-repeat"></div>
-      <div className=" relative flex flex-col justify-between max-w-[500px] w-full h-[90vh] m-auto p-4 text-gray-300 z-10 ">
+      <div
+        className=" relative flex flex-col justify-between max-w-[500px] w-full h-[90vh] m-auto p-4 text-gray-300 z-10 animate__animated animate__fadeIn animate__ease-out
+      "
+      >
         <div className="relative flex justify-between pt-12 bg-black/50 p-8 rounded-md shadow-2xl ">
           <div className="flex flex-col items-center ">
-            <h4>{data.name}</h4>
             <Image
               src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
               alt="/"

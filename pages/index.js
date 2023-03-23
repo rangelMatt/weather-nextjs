@@ -7,11 +7,13 @@ import Weather from "../components/Weather";
 import Spinner from "../components/Spinner";
 // import Custom404 from "../pages/404";
 import errorHandler from "@/components/errorHandler";
+import errHandle from "@/components/ErrHandle";
 
 export default function Home() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(true);
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
   // console.log(city);
@@ -20,13 +22,21 @@ export default function Home() {
     try {
       e.preventDefault();
       setLoading(true);
-      axios.get(url).then((response) => {
-        setWeather(response.data);
-      });
+      axios
+        .get(url)
+        .then((response) => {
+          setWeather(response.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            window.location.href = "/";
+          }
+        });
+
       setCity("");
       setLoading(false);
     } catch (err) {
-      errorHandler(err);
+      console.log(err.message);
       // if (err.response) {
       //   console.log(err.response.data);
       //   console.log(err.response.status);
@@ -36,6 +46,32 @@ export default function Home() {
       // } else {
       // }
     }
+  };
+
+  // const fetchWeather = (e, response, request) => {
+  //   try {
+  //     e.preventDefault();
+  //     setLoading(true);
+  //     axios.get(url).then((response) => {
+  //       setWeather(response.data);
+  //     });
+  //     setCity("");
+  //     setLoading(false);
+  //   } catch (err) {
+  //     errorHandler(err);
+  //     // if (err.response) {
+  //     //   console.log(err.response.data);
+  //     //   console.log(err.response.status);
+  //     //   console.log(err.response.headers);
+  //     //   response.status(404).send("Sorry. Something went wrong");
+  //     // } else if (err.request) {
+  //     // } else {
+  //     // }
+  //   }
+  // };
+
+  const refresh = () => {
+    setWeather({});
   };
 
   return (
@@ -58,39 +94,40 @@ export default function Home() {
         <div className="relative group flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10">
           <div
             className="absolute -inset-0.5 bg-gradient-to-r  from-blue-500 to-green-500 w-full m-auto p-3 rounded-2xl blur-md opacity-75 
-          
-          group-hover:to-blue-500 group-hover:from-green-500 shadow-md group-hover:bg-gradient-from-r 
-
-          
-          
+          group-hover:to-blue-500 group-hover:from-green-500 shadow-md 
           animate-tilt"
           ></div>
           <form
             onSubmit={fetchWeather}
             className=" relative px-7 py-4 leading-none flex justify-between items-center w-full m-auto p-3 bg-transparent border border-gray-300 text-white rounded-2xl bg-gradient-to-r from-blue-500 
-            transition duration-0 ease-out
-            group-hover:delay-500
-            group-hover:to-blue-500 group-hover:from-green-500 shadow-md group-hover:bg-gradient-from-r 
-            group-hover:text-gray-100 "
+            group-hover:to-blue-500 group-hover:from-green-500 shadow-md 
+            "
           >
             <div>
               <input
                 city="city"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="bg-transparent border-none text-white focus:outline-none text-2xl"
+                className="bg-transparent border-none text-white focus:outline-none text-2xl
+                "
                 type="text"
                 placeholder="Search City"
               />
             </div>
-            <button onClick={fetchWeather}>
+            <button
+              onClick={() => {
+                fetchWeather();
+                refresh();
+              }}
+              data-te-ripple-init
+              data-te-ripple-color="light"
+            >
               <BsSearch size={20} />
             </button>
           </form>
         </div>
       </div>
       {/* Weather */}
-
       {weather.main && <Weather data={weather} />}
     </div>
   );
