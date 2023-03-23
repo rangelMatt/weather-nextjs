@@ -50,28 +50,6 @@ export default function Home() {
     }
   };
 
-  // const fetchWeather = (e, response, request) => {
-  //   try {
-  //     e.preventDefault();
-  //     setLoading(true);
-  //     axios.get(url).then((response) => {
-  //       setWeather(response.data);
-  //     });
-  //     setCity("");
-  //     setLoading(false);
-  //   } catch (err) {
-  //     errorHandler(err);
-  //     // if (err.response) {
-  //     //   console.log(err.response.data);
-  //     //   console.log(err.response.status);
-  //     //   console.log(err.response.headers);
-  //     //   response.status(404).send("Sorry. Something went wrong");
-  //     // } else if (err.request) {
-  //     // } else {
-  //     // }
-  //   }
-  // };
-
   const refresh = () => {
     setWeather({});
   };
@@ -88,7 +66,7 @@ export default function Home() {
       <Image
         src="https://images.unsplash.com/photo-1438786657495-640937046d18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
         layout="fill"
-        className=" bg-cover bg-center bg-no-repeat brightness-50 w-full h-screen z=[1]"
+        className=" object-cover bg-cover bg-center bg-no-repeat brightness-50 w-full h-screen z=[1]"
         alt="Cape Perpetua"
       ></Image>
       {/* Search */}
@@ -113,7 +91,7 @@ export default function Home() {
                 className="bg-transparent border-none text-white focus:outline-none text-2xl
                 "
                 type="text"
-                placeholder="Search City"
+                placeholder="Search City (No State)"
               />
             </div>
             <button
